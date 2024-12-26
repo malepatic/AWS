@@ -26,7 +26,7 @@ jobs:
       # Step 3: Install Backend Dependencies
       - name: Install Backend Dependencies
         working-directory: ./backend
-        run: npm install -y
+        run: npm i
 
       # Step 4: Install Frontend Dependencies
       - name: Install Frontend Dependencies
