@@ -6,9 +6,11 @@ const {roleRouter} = require('./routes/role')
 const {loginRouter} = require('./routes/login')
 const {userRouter} = require('./routes/user')
 const app = express();
+const cors = require("cors")
 
 // Middleware to parse JSON requests
 app.use(express.json());
+app.use(cors())
 
 // Connect to MongoDB
 connectDB();
