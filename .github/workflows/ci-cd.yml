@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build App
-    runs-on : ubuntu-lates
+    runs-on : ubuntu-latest
 
     steps:
       - name: Checkout Code
