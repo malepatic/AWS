@@ -6,7 +6,10 @@ const UserSchema = ({
     username : {type:String, required:true, unique:true},
     email : {type:String, required:true, unique:true},
     password : {type:String, required:true},
-    role : {type:ObjectId, ref : "roles"}
+    role : {type:ObjectId, ref : "roles"},
+    events : [{
+        type: ObjectId, ref:"events"
+    }]
 })
 
 const UserModel = mongoose.model("Users", UserSchema);
