@@ -31,7 +31,7 @@ jobs:
       # Step 4: Install Frontend Dependencies
       - name: Install Frontend Dependencies
         working-directory: ./frontend
-        run: npm install
+        run: npm i
 
       # Step 5: Lint Backend Code
       - name: Lint Backend Code
