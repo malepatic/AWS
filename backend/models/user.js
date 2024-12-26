@@ -1,34 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
-const eventSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    startDate: {
-      type: Date,
-      required: true,
-    },
-    endDate: {
-      type: Date,
-      required: true,
-    },
-    location: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
-  }
-);
+const UserSchema = ({
+    username : {type:String, required:true, unique:true},
+    email : {type:String, required:true, unique:true},
+    password : {type:String, required:true},
+    role : {type:ObjectId, ref : "roles"}
+})
 
-// Check if the model already exists before creating it
-const Event = mongoose.models.Event || mongoose.model('Event', eventSchema);
+const UserModel = mongoose.model("Users", UserSchema);
 
-module.exports = Event;
+module.exports = {
+    UserModel : UserModel
+}

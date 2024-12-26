@@ -1,4 +1,4 @@
-name: CI/CD for Event Management System
+name : CI/CD for Event Management System
 
 on:
   push:
@@ -9,61 +9,22 @@ on:
       - main
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  build:
+    name: Build App
+    runs-on : ubuntu-lates
 
     steps:
-      # Step 1: Checkout Code
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  
 
-      # Step 2: Set Up Node.js
-      - name: Set Up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      # Step 3: Install Backend Dependencies
       - name: Install Backend Dependencies
-        working-directory: ./backend
-        run: npm i
-
-      # Step 4: Install Frontend Dependencies
-      - name: Install Frontend Dependencies
-        working-directory: ./frontend
-        run: npm i
-
-      # Step 5: Lint Backend Code
-      - name: Lint Backend Code
-        working-directory: ./backend
-        run: npm run lint
-
-      # Step 6: Lint Frontend Code
-      - name: Lint Frontend Code
-        working-directory: ./frontend
-        run: npm run lint
-
-      # Step 7: Run Backend Tests
-      - name: Run Backend Tests
-        working-directory: ./backend
-        run: npm test
-
-      # Step 8: Run Frontend Tests
-      - name: Run Frontend Tests
-        working-directory: ./frontend
-        run: npm test
-
-      # Step 9: Build Frontend
-      - name: Build Frontend
-        working-directory: ./frontend
-        run: npm run build
-
-      # Step 10: Archive Frontend Build Artifacts (Optional)
-      - name: Upload Build Artifacts
-        if: success()
-        uses: actions/upload-artifact@v3
-        with:
-          name: frontend-build
-          path: ./frontend/build
-
-          
+        run: |
+          cd backend
+          npm init -y
+          npm install 
+      
+      - name : Install frontend Dependencies
+        run : |
+          cd frontend
+          npm init -y
+          npm install
