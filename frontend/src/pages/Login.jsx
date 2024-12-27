@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         const response = await fetch('http://localhost:3000/api/login', {
@@ -13,9 +15,13 @@ const Login = () => {
         });
         
         const data = await response.json();
+        console.log(data)
         if (data.token) {
             alert("Logged in")
             localStorage.setItem("token", data.token)
+            if(data.role=="Admin"){
+                navigate('/user/book-events')
+            }
         } else {
             alert("invalid credentials");
         }

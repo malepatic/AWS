@@ -2,6 +2,7 @@ const express = require('express');
 const Router = express.Router;
 const userRouter = Router();
 const { UserModel } = require("../models/user");
+const Event = require("../models/event")
 const { authenticateToken } = require("../middleware/auth")
 
 userRouter.post("/register-event", authenticateToken, async (req, res) => {
@@ -52,6 +53,26 @@ userRouter.post("/deregister-event", authenticateToken, async (req, res) => {
         res.status(403).json({ message: "Unable to deregister "+error });
     }
 });
+
+userRouter.get("/my-events", authenticateToken, async (req, res) => {
+    const userId = req.user;
+    try {
+        const { events } = await UserModel.findOne({
+            _id: userId
+        })
+        const listEvents = [];
+        for (let i=0;i<events.length; i++){
+            const event = await Event.findOne({
+                _id : events[i]
+            })
+            listEvents.push(event);
+        }
+      res.status(200).json({ events: listEvents });
+    } catch (error) {
+      res.status(403).json({ message: "Unable to fetch registered events: " + error });
+    }
+  });
+  
 
 module.exports = {
     userRouter: userRouter
