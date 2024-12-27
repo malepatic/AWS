@@ -3,6 +3,7 @@ const express = require("express");
 const Router = express.Router;
 const loginRouter = Router();
 const { UserModel } = require("../models/user")
+const { RoleModel } = require("../models/role")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 const JWTSECRETKEY = process.env.JWTSECRETKEY;
@@ -19,13 +20,18 @@ loginRouter.post("/", async (req, res) => {
         return;
     }
     const checkPassword = await bcrypt.compare(password, findUser.password);
+    const id = findUser.role;
+    const role = await RoleModel.findOne({
+        _id:id
+    })
     if (checkPassword) {
         const token = jwt.sign({
             id: findUser._id,
-            username: findUser.username
+            username: findUser.username,
         }, JWTSECRETKEY)
         res.status(200).json({
-            token: token
+            token: token,
+            role : role.roleName
         })
     }
     else {
