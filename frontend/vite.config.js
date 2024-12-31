@@ -10,4 +10,7 @@ if (typeof globalThis.structuredClone === 'undefined') {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: true,
+    },
 })

@@ -4,7 +4,7 @@ const Router = express.Router;
 const loginRouter = Router();
 const { UserModel } = require("../models/user")
 const { RoleModel } = require("../models/role")
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const JWTSECRETKEY = process.env.JWTSECRETKEY;
 

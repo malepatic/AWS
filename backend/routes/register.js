@@ -4,7 +4,7 @@ const registerRouter = Router();
 const z = require("zod");
 const {RoleModel} = require("../models/role")
 const {UserModel} = require("../models/user")
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 registerRouter.post("/", async(req,res)=>{
     const {username, email, password, role} = req.body;

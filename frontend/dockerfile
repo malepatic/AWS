@@ -1,0 +1,23 @@
+# Use official Node.js image with Alpine for smaller size
+FROM node:16.20.2-alpine
+
+# Step 1: Set the working directory in the container
+WORKDIR /app
+
+# Step 2: Copy package.json and package-lock.json (or yarn.lock)
+COPY package*.json ./
+
+# Step 3: Install dependencies (including Vite)
+RUN npm install
+
+# Step 4: Copy the rest of the application code
+COPY . .
+
+# Step 5: Build the application (run Vite build)
+RUN npm run build  
+
+# Step 6: Expose the port that Vite serves (default is 5173 for dev and production preview)
+EXPOSE 5173
+
+# Step 7: Start the app (for preview or production server)
+CMD ["npm", "run", "dev"] 
