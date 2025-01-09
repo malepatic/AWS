@@ -8,7 +8,7 @@ const authenticateToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWTSECRETKEY); // Use your JWT secret here
+    const decoded = jwt.verify(token, process.env.JWTSECRETKEY); // JWT secret Key
     req.user = decoded.id; // Attach the user to the request
     next();
   } catch (error) {
